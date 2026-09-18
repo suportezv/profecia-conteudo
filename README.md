@@ -4,7 +4,7 @@ Estúdio de edição e agendamento de conteúdo para as redes do **Profecia** (`
 
 - **`FRAMEWORK.md`**: persona, regras, pilares, assinaturas e fluxo por vídeo.
 - **`CLAUDE.md`**: memória persistente (IDs, contas, gotchas, PENDENTES de marca).
-- **`projects/`**: um subdiretório por vídeo. **`scripts/`**: setup e validação. **`patches/`**: correções de ferramentas. **`assets/sfx/`**: biblioteca de sons do grupo.
+- **`projects/`**: um subdiretório por vídeo. **`scripts/`**: setup, validação e o cinto de ferramentas do grupo (decupagem por âncora de texto, LUT S-Log2, ZIP remoto do Drive, geração de imagem, upload para o Drive). **`remotion/`**: composições React; paleta só em `src/marca.ts`. **`assets/sfx/`**: biblioteca de sons do grupo.
 
 ## Primeiro uso (cloud)
 
