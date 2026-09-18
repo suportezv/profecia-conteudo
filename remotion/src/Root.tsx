@@ -1,6 +1,8 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import { CartaoTitulo } from "./CartaoTitulo";
+import { PostInstagram } from "./PostInstagram";
+import { POSTS } from "./posts";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -30,5 +32,8 @@ export const RemotionRoot: React.FC = () => (
         rodape: "profec.ia.br",
       }}
     />
+    {POSTS.map((p) => (
+      <Still key={p.id} id={p.id} component={PostInstagram} width={1080} height={1350} defaultProps={p.props} />
+    ))}
   </>
 );

@@ -9,6 +9,8 @@
     "still": "remotion still"
   },
   "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
     "@remotion/cli": "4.0.526",
     "react": "19.2.0",
     "react-dom": "19.2.0",

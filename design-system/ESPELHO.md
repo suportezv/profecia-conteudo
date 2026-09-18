@@ -13,4 +13,4 @@ Regras:
 2. `remotion/src/marca.ts` usa os mesmos nomes de token (camelCase) e os mesmos valores oklch. Se a paleta mudar, mudar lá também.
 3. Para ler o sistema por agente: começar pelo `README.md`; a cauda gerada dele no artifact indexa os cards de cada componente e token.
 
-Espelhado em 18/set/2026 (versão com a revisão: cores da intro, timeline da animação de marca, GhostCTA sinalizado como não usado no site).
+Espelhado em 18/set/2026 (versão em português, com a revisão: cores da intro, timeline da animação de marca, GhostCTA sinalizado como não usado no site).

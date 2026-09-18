@@ -39,9 +39,9 @@ export const marca = {
   footerBg: "oklch(0.18 0.02 250)",
   /**
    * Fraunces (titulos, numerais, wordmark; pesos 300 a 600, nunca bold) e
-   * Manrope (todo o resto). Sao Google Fonts; fonts.gstatic.com esta fora da
-   * allowlist do environment, entao o render cai para a serifa/sans do sistema
-   * ate os arquivos entrarem em assets/fonts/ (PENDENTE).
+   * Manrope (todo o resto). Carregadas como arquivos locais pelos pacotes
+   * @fontsource (ver fontes.ts), porque fonts.gstatic.com esta fora da
+   * allowlist do environment.
    */
   fonteSerif: '"Fraunces", Georgia, serif',
   fonteSans: '"Manrope", system-ui, sans-serif',
