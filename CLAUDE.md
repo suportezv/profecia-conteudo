@@ -12,7 +12,15 @@ Este repositório é o **Profecia Conteúdo Studio**: edição e agendamento de 
 - **Pronúncia da marca em TTS**: hipótese "profecia" como a palavra em português; confirmar antes da primeira locução (regra aprendida: a Profissio.ai se fala "profício ei ái").
 - **Voz ElevenLabs**: o produto é feminino e acolhedor; voice_id próprio ou o `LetL52AJ3xLLkD3x88iE` da Profissio.ai? Confirmar.
 - **Ativos de marca**: o logo (pomba dourada sobre cruz, círculo) está em `assets/marca/logo-profecia.png`, baixado do site. Arquivos das fontes Fraunces e Manrope e outros ativos: pasta no Drive, se existir.
-- **Identidade visual**: **definida pelo site**, registrada em `remotion/src/marca.ts` (tokens convertidos de oklch) e no `FRAMEWORK.md`. Não herdar nada da Profissio.ai.
+- **Identidade visual**: **definida pelo Profecia Design System** (seção abaixo). Não herdar nada da Profissio.ai.
+
+## Profecia Design System (padrão de marca, adotado em 18/set/2026)
+
+- **Fonte viva**: artifact `https://claude.ai/artifact/Vg5ZfCmtRDAnWQsRiqafXv` (tipo Design System). Extraído do código do site (build `v=20260828b`): 89 cores, 44 estilos de texto, espaçamento, raios, sombras, layout, motion, logo (PNG dourado/branco + SVG traçado) e 15 componentes com preview. Revisado contra o site em 18/set/2026: fiel; ajustes feitos foram as cores da intro (`paper`, `gates`), a timeline exata da animação de marca (dove + círculo + cruz + wordmark, 6,9s, do `intro.jsx`) e a sinalização de que `GhostCTA` existe no código mas não aparece na página.
+- **Como usar**: antes de qualquer peça, ler `design-system/README.md` (espelho) ou o `project/README.md` do artifact. Paleta e tipografia **não se decidem por peça**: vêm dos tokens. `remotion/src/marca.ts` espelha os tokens com os mesmos nomes em camelCase e os valores oklch literais; `remotion/src/Ceu.tsx` é o fundo "céu com sol" do hero; `CartaoTitulo` segue o `hero` (Fraunces 400, -0.025em, 1.05) com a frase de destaque em `hero-em` (300 itálico, `gold-hex`).
+- **Regras que mais importam para vídeo**: dourado é o único acento; nada em Fraunces é bold; uma frase itálica dourada por título, nunca o título inteiro; cartões separados por borda de 1px, sombra só no que flutua; ritmo lento (halo do sol 6s, nuvens 60 a 90s, CTA pulsando 2,6s); emoji só como ícone de feature no tile `gold-wash` e nas bolhas do chat; o chat do WhatsApp é o device narrativo. Contraste: `ink-mute` (3,9:1) e `gold` (2,5:1) sobre branco não carregam texto essencial pequeno.
+- **Fontes no render**: Fraunces e Manrope são Google Fonts e `fonts.googleapis.com`/`fonts.gstatic.com` estão **fora da allowlist** (CONNECT 000 em 18/set/2026). O Remotion cai para a serifa/sans do sistema. **PENDENTE**: liberar os dois hosts ou colocar os `.woff2`/`.ttf` em `assets/fonts/` e registrar em `marca.ts`.
+- **Espelho**: `design-system/README.md` e `design-system/tokens.json` (ver `design-system/ESPELHO.md`). Mudou no artifact, atualiza o espelho.
 
 ## Regras que valem em qualquer resposta pública (herdadas do grupo, confirmadas pelo usuário)
 
@@ -41,9 +49,9 @@ Ferramenta é genérica, marca não é: os scripts abaixo vieram sem edição (z
 | `scripts/zip_index_remoto.py` | Lista e extrai arquivos de um ZIP gigante no Drive por *range request*, sem baixar o ZIP |
 | `scripts/gera_imagem.py` | Gera imagem pela OpenAI ou pelo Gemini, mesma interface; chaves **só** por variável de ambiente (recusa chave por argumento) |
 | `scripts/sobe_para_drive.py` | Sobe arquivos para uma pasta do Drive com token de acesso |
-| `remotion/` | Composições React (`CartaoTituloVertical`, `CartaoTituloQuadrado`). Paleta e fonte vivem **só** em `src/marca.ts`; rodapé em `src/Root.tsx`. Render usa o `headless_shell` do Playwright (fixado em `remotion.config.ts`) |
+| `remotion/` | Composições React (`CartaoTituloVertical`, `CartaoTituloQuadrado`). Tokens em `src/marca.ts` (espelho do Design System), fundo em `src/Ceu.tsx`; rodapé em `src/Root.tsx`. Render usa o `headless_shell` do Playwright (fixado em `remotion.config.ts`) |
 
-`remotion/src/marca.ts` carrega a paleta e as fontes **do site** (oklch convertido para hex); se a marca mudar, trocar só os hexes e a fonte ali.
+`remotion/src/marca.ts` espelha os tokens do Design System (nomes em camelCase, valores oklch literais, que o headless_shell renderiza). Se a marca mudar, muda no Design System primeiro, depois ali.
 
 Chaves que os scripts esperam **nas variáveis de ambiente do environment** (nunca em arquivo do repo, nunca no chat): `ELEVENLABS_API_KEY`, `OPENAI_API_KEY` e `GEMINI_API_KEY`. As três foram cadastradas pelo usuário em 18/set/2026; as duas novas só aparecem em **sessão nova** (conferir com `printenv | grep -c API_KEY`, esperado 3, e com `gera_imagem.py --listar`). Variável cadastrada com sessão aberta só aparece em **sessão nova**; conferir com `printenv | grep -c API_KEY`. Chave válida não significa quota: no Gemini, `429` com `quotaId: ...-FreeTier` quer dizer que o projeto da chave não está no faturamento (ler o campo `details` do erro).
 
@@ -82,5 +90,6 @@ Ver o `CLAUDE.md` do `suportezv/profissioai-conteudo`, seções "Rede do environ
 ## Histórico de decisões
 
 - **18/ago/2026**: estúdio criado por réplica do `profissioai-conteudo` a pedido do usuário. Infra e gotchas herdados; marca 100% PENDENTE até a leitura de `profec.ia.br` e as definições da equipe.
+- **18/set/2026**: **Profecia Design System adotado como padrão** (artifact `Vg5ZfCmtRDAnWQsRiqafXv`, criado pelo usuário a partir do código do site). Revisado contra o site: fiel; acrescentadas as cores da intro, a timeline da animação de marca e a nota do `GhostCTA`. Remotion realinhado (tokens com os nomes do sistema, fundo céu, Fraunces 400 + itálico dourado). Espelho em `design-system/`. Fontes Google fora da allowlist: pendente.
 - **18/set/2026**: site `profec.ia.br` lido pela primeira vez (usuário liberou o domínio). O Profecia é um companheiro de fé cristã por WhatsApp, B2C, e não um "agente de IA" no sentido B2B dos outros clientes: `CLAUDE.md`, `FRAMEWORK.md` e `remotion/src/marca.ts` reescritos com o que o site diz, sem inferência. Chaves OpenAI/Gemini cadastradas pelo usuário; visíveis só em sessão nova.
 - **18/set/2026**: cinto de ferramentas portado do `profissioai-conteudo` seguindo o `PORTAR.md` de lá (6 scripts genéricos, `setup.sh`/`validate.sh` com 5 linhas de marca trocadas, `remotion/` com paleta placeholder neutra, `patches/` aposentado). No mesmo dia o site foi lido e a paleta real substituiu o placeholder (item acima).

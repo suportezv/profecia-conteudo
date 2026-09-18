@@ -13,7 +13,7 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
       defaultProps={{
         titulo: "Sua fé, todo dia, que te ouve e responde.",
-        destaque: "responde",
+        destaque: "que te ouve",
         rodape: "profec.ia.br",
       }}
     />
@@ -26,7 +26,7 @@ export const RemotionRoot: React.FC = () => (
       height={1080}
       defaultProps={{
         titulo: "Sua fé, todo dia, que te ouve e responde.",
-        destaque: "responde",
+        destaque: "que te ouve",
         rodape: "profec.ia.br",
       }}
     />

@@ -1,43 +1,48 @@
 /**
- * Paleta e tokens do Profecia, lidos do proprio site (profec.ia.br, 18/set/2026):
- * `skyPalette` e `ACCENT` em lp-sections.jsx/app.jsx, e as fontes do <head>.
- * Os valores oklch do site foram convertidos para hex com a colour-science.
+ * Tokens do Profecia, espelhando o Profecia Design System
+ * (https://claude.ai/artifact/Vg5ZfCmtRDAnWQsRiqafXv), que por sua vez foi
+ * extraido do site profec.ia.br (build v=20260828b). Os nomes abaixo sao os
+ * nomes dos tokens do Design System em camelCase; os valores sao os literais
+ * de la (oklch, que o headless_shell do Chromium renderiza nativamente).
  *
- * Gramatica visual do site: "ceu azul suave com brilho de sol dourado"
- * (comentario literal do codigo), tinta azul-marinho, dourado como unico
- * acento (CTA, logo pomba+cruz), cartoes brancos. Serifa Fraunces nos titulos,
- * Manrope no corpo.
- *
- * As chaves mantem o nome herdado do Remotion do grupo (rosaVivo, ciano...)
- * porque Aurora.tsx e CartaoTitulo.tsx leem por elas; o valor e o do Profecia.
- * Nada aqui vem da Profissio.ai.
+ * Regra do estudio: paleta e tipografia NAO se decidem aqui. Mudou no Design
+ * System, muda aqui; nunca o contrario. Espelho versionado em design-system/.
  */
 export const marca = {
-  /** Acento da marca: dourado (ACCENT literal do site). Vai na palavra de destaque. */
-  rosaVivo: "#C99A40",
-  /** Dourado do skyPalette.gold. */
-  rosa: "#CD9A50",
-  /** Dourado suave (skyPalette.goldSoft). */
-  rosaSuave: "#E6C99A",
-  /** Brilho de sol (skyPalette.bgGlow). */
-  violeta: "#FFF0C4",
-  /** Azul-ceu do topo (skyPalette.bgTop). */
-  ciano: "#D2F0FF",
-  /** Azul-ceu medio (skyPalette.bgMid). */
-  azulNeon: "#E0F6FE",
-  /** Tinta azul-marinho (skyPalette.ink). */
-  azulProfundo: "#1D2A37",
-  /** Fundo escuro do rodape do site. */
-  fundoEscuro: "#0C1322",
-  superficie: "#1B1B1F",
-  /** Fundo de pagina do site (skyPalette.pageBg): base clara dos fundos. */
-  auroraBase: "#F7FBFD",
-  /** Tinta dos textos (skyPalette.ink). */
-  tinta: "#1D2A37",
+  // Dourado: o unico acento
+  gold: "oklch(0.72 0.11 75)",
+  goldDeep: "oklch(0.65 0.12 70)",
+  goldSoft: "oklch(0.85 0.07 80)",
+  /** ACCENT literal do site: traco do simbolo, italico do hero. */
+  goldHex: "#C99A40",
+  goldWash: "oklch(0.97 0.025 80)",
+  goldGhost: "oklch(0.94 0.04 80)",
+  // Ceu do hero (gradiente 180deg: top 0%, mid 35%, low 65%, base 100%)
+  skyTop: "oklch(0.93 0.05 230)",
+  skyMid: "oklch(0.95 0.035 225)",
+  skyLow: "oklch(0.97 0.025 215)",
+  skyBase: "oklch(0.99 0.01 220)",
+  skyWash: "oklch(0.95 0.04 240)",
+  sun: "oklch(0.99 0.1 85)",
+  sunGlow: "oklch(0.97 0.08 80)",
+  // Papel-creme da intro (animacao de marca)
+  paper: "oklch(0.985 0.022 80)",
+  paperMid: "oklch(0.965 0.028 78)",
+  paperEdge: "oklch(0.94 0.03 75)",
+  // Tinta e superficies
+  ink: "oklch(0.28 0.03 250)",
+  inkSoft: "oklch(0.45 0.02 250)",
+  inkMute: "oklch(0.6 0.015 250)",
+  pageBg: "oklch(0.985 0.005 240)",
+  surface: "#ffffff",
+  border: "oklch(0.93 0.01 240)",
+  footerBg: "oklch(0.18 0.02 250)",
   /**
-   * Titulos em Fraunces (serifa optica), corpo em Manrope; ambas do Google
-   * Fonts no site. Sem rede no render, cai para a serifa/sans do sistema:
-   * para usar as fontes de verdade, embutir os arquivos como asset local.
+   * Fraunces (titulos, numerais, wordmark; pesos 300 a 600, nunca bold) e
+   * Manrope (todo o resto). Sao Google Fonts; fonts.gstatic.com esta fora da
+   * allowlist do environment, entao o render cai para a serifa/sans do sistema
+   * ate os arquivos entrarem em assets/fonts/ (PENDENTE).
    */
-  fonte: '"Fraunces", "Manrope", Georgia, system-ui, serif',
+  fonteSerif: '"Fraunces", Georgia, serif',
+  fonteSans: '"Manrope", system-ui, sans-serif',
 } as const;

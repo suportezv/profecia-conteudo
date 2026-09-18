@@ -15,13 +15,16 @@ Estúdio de edição e agendamento para as redes do **Profecia** (`profec.ia.br`
 - **Redes** (do Metricool, 18/set/2026): Instagram `@meuprofecia` (10,7 mil seguidores, já posta ~2 Reels/dia), Facebook (306 seguidores), TikTok `@meuprofeciaoficial` (zerado). **Quem fala nas redes** (a própria Profecia em primeira pessoa ou a marca em terceira): **A CONFIRMAR**, e ler o feed atual antes de propor.
 - **Pronúncia da marca em TTS**: **A CONFIRMAR** (hipótese: "profecia" em português).
 
-## Identidade visual (do site)
+## Identidade visual (padrão: Profecia Design System)
+
+**A fonte de verdade é o Design System** (`https://claude.ai/artifact/Vg5ZfCmtRDAnWQsRiqafXv`, espelho em `design-system/`). O resumo abaixo existe para leitura rápida; em caso de dúvida, vale o token de lá.
 
 - **Gramática**: "céu azul suave com brilho de sol dourado" (comentário literal do código), cartões brancos, muito respiro. Dourado é o **único** acento: CTA, logo, palavra de destaque. Nada de rosa, roxo ou neon.
-- **Paleta** (oklch do site convertido para hex, tokens em `remotion/src/marca.ts`): dourado `#C99A40` (acento) e `#CD9A50`/`#E6C99A` (suave); céu `#D2F0FF` (topo) e `#E0F6FE` (meio); brilho de sol `#FFF0C4`; tinta `#1D2A37`, tinta suave `#4D5660`, tinta muda `#7A8189`; página `#F7FBFD`; rodapé escuro `#0C1322`.
+- **Paleta** (tokens do Design System, em oklch; `remotion/src/marca.ts` espelha): `gold` oklch(0.72 0.11 75) e `gold-deep` oklch(0.65 0.12 70) no gradiente do CTA; `gold-hex` #C99A40 no símbolo e no itálico; céu `sky-top` oklch(0.93 0.05 230) → `sky-mid` → `sky-low` → `sky-base` oklch(0.99 0.01 220) com `sun-glow` oklch(0.97 0.08 80); tinta `ink` oklch(0.28 0.03 250), `ink-soft`, `ink-mute`; página `page-bg` oklch(0.985 0.005 240); rodapé `footer-bg` oklch(0.18 0.02 250); papel-creme da intro `paper` oklch(0.985 0.022 80).
 - **Tipografia**: **Fraunces** (serifa óptica, pesos 300 a 600) nos títulos, **Manrope** (400 a 700) no corpo. Ambas Google Fonts; embutir como asset local para render sem rede.
 - **Logo**: pomba dourada pousada sobre uma cruz, dentro de um círculo em linha fina (`assets/marca/logo-profecia.png`, 512px, do site).
-- **Motion do site**: pulso dourado suave no CTA, ponto luminoso orbitando o rótulo de seção, pulso convidando a tocar a mensagem de voz. Ritmo lento e calmo, nada de glitch ou corte seco.
+- **Motion do site**: pulso dourado suave no CTA (2,6s), halo do sol respirando (6s), nuvens à deriva (60 a 90s), bolhas do chat entrando com mola (`cubic-bezier(0.2, 0.9, 0.3, 1.05)`). Ritmo lento e calmo, nada de glitch ou corte seco.
+- **Animação de marca** (intro do site, 6,9s): pomba dourada em traço voa da direita para a esquerda sobre papel-creme, volta por baixo, pousa no centro; o círculo se desenha em sentido horário, a cruz surge, o wordmark sobe em Fraunces e viaja para o cabeçalho mudando de dourado para tinta; explosão de luz dourada no fim. Timeline exata (ms) na seção Motion do Design System. É a abertura ou o fecho natural de qualquer Reel institucional.
 
 ### REGRAS INEGOCIÁVEIS (herdadas do grupo)
 
@@ -40,7 +43,7 @@ Derivados das 12 funcionalidades literais do site, filtrando pelas que são (1) 
 5. **Devocional diário no seu horário e Desafio de 7 dias**: constância sem culpa ("todo dia no mesmo horário, sem culpa, sem cobrança, só presença").
 6. **Explicação da Bíblia sem vergonha de perguntar**: "é anônimo, sem julgamento".
 
-Prova social do site: contadores de pessoas que já conversaram, orações criadas e músicas personalizadas (valores 12, 85 e 9 no código, sufixo renderizado a conferir na página antes de citar). Depoimentos com nome e @ (Juliana Prado, Marcos Vinícius, Patrícia Gomes, Rafael Lima, Karine Souza, Tiago Mendes, Ana Paula Santos, Cleicimara Alves): usar só com autorização, são pessoas.
+Prova social do site: **+12 mil** pessoas que já conversaram, **+85 mil** orações criadas, **+9 mil** músicas personalizadas (`CountUp` com prefixo `+` e sufixo ` mil`, confirmado no código). Depoimentos com nome e @ (Juliana Prado, Marcos Vinícius, Patrícia Gomes, Rafael Lima, Karine Souza, Tiago Mendes, Ana Paula Santos, Cleicimara Alves): usar só com autorização, são pessoas.
 
 ## Assinaturas de motion (herdadas: craft do grupo, validado contra 4 vídeos reais do @elevenlabsio)
 
