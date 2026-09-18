@@ -12,7 +12,7 @@ Estúdio de edição e agendamento para as redes do **Profecia** (`profec.ia.br`
 - **Tom**: acolhedor, íntimo, segunda pessoa ("você"), frases curtas, zero jargão de tecnologia. O site nunca diz "chatbot", "agente" ou "automação"; diz "presença", "caminhar com você", "espaço só seu". A resposta-modelo da Profecia no site: *"Estou aqui com você. Quer que eu ore com você por isso, ou prefere começar conversando sobre o que está pesando?"*. Sem sermão: "Ela não me deu sermão, me deu o Salmo 34 e ficou ali comigo."
 - **Vocabulário do site**: fé, Palavra de Deus, oração, devocional, caminhada/jornada, presença, acolhimento, "do seu jeito, no seu tempo". Emojis aparecem nas conversas simuladas (🥲, 👆🏻), com parcimônia.
 - **CTAs literais do site**: "Começar minha jornada", "Quero fortalecer minha fé", "Sim, minha fé merece esse espaço", "Escolher meu plano", "Siga pra receber um lembrete diário de fé" (Instagram). Preço de ancoragem: "A partir de R$ 9,90 por mês · cancele quando quiser". Assinatura do rodapé: "Feito com fé." **A CONFIRMAR**: qual CTA e qual destino (site, checkout ou WhatsApp) valem para as redes.
-- **Quem fala nas redes** (a própria Profecia em primeira pessoa ou a marca em terceira) e **handle do Instagram**: **A CONFIRMAR**.
+- **Redes** (do Metricool, 18/set/2026): Instagram `@meuprofecia` (10,7 mil seguidores, já posta ~2 Reels/dia), Facebook (306 seguidores), TikTok `@meuprofeciaoficial` (zerado). **Quem fala nas redes** (a própria Profecia em primeira pessoa ou a marca em terceira): **A CONFIRMAR**, e ler o feed atual antes de propor.
 - **Pronúncia da marca em TTS**: **A CONFIRMAR** (hipótese: "profecia" em português).
 
 ## Identidade visual (do site)
@@ -84,5 +84,5 @@ Estrutura do grupo adaptada ao tom do site: abertura pela **dor ou pelo momento*
 6. Mix com ducking, master **-14 LUFS**
 7. **Preview na conversa para aprovação**
 8. Caption
-9. Agendamento no Metricool como rascunho (marca do Profecia, blog_id PENDENTE; mídia via commit temporário público)
+9. Agendamento no Metricool como rascunho (marca Profec.ia, blog_id 7027080; mídia via commit temporário público; tirar do rascunho na mesma sessão)
 10. Registrar aprendizados no POS.md do projeto e atualizar o CLAUDE.md

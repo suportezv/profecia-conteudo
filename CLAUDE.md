@@ -8,10 +8,9 @@ Este repositório é o **Profecia Conteúdo Studio**: edição e agendamento de 
 
 ## PENDENTES de marca (o que ainda bloqueia texto público)
 
-- **Confirmação da equipe**: o `FRAMEWORK.md` foi preenchido só com o que o site diz. Persona do perfil (quem fala nas redes: a própria Profecia em primeira pessoa ou a marca em terceira?), CTA oficial das redes (link do site, do checkout ou o WhatsApp?) e handle do Instagram (o site linka `instagram.com/` sem handle) precisam de confirmação.
+- **Confirmação da equipe**: o `FRAMEWORK.md` foi preenchido só com o que o site diz. Persona do perfil (quem fala nas redes: a própria Profecia em primeira pessoa ou a marca em terceira?) e CTA oficial das redes (link do site, do checkout ou o WhatsApp?) precisam de confirmação. Os handles vieram do Metricool: Instagram `@meuprofecia`, TikTok `@meuprofeciaoficial`. O perfil do Instagram já posta ~2 Reels por dia: **ler o feed atual (prints do usuário) antes de propor gramática nova**, para não colidir com o que já existe.
 - **Pronúncia da marca em TTS**: hipótese "profecia" como a palavra em português; confirmar antes da primeira locução (regra aprendida: a Profissio.ai se fala "profício ei ái").
 - **Voz ElevenLabs**: o produto é feminino e acolhedor; voice_id próprio ou o `LetL52AJ3xLLkD3x88iE` da Profissio.ai? Confirmar.
-- **Redes e Metricool**: conectar a marca do Profecia no painel (conta `suporte@profissio.ai`) e registrar aqui o blog_id.
 - **Ativos de marca**: o logo (pomba dourada sobre cruz, círculo) está em `assets/marca/logo-profecia.png`, baixado do site. Arquivos das fontes Fraunces e Manrope e outros ativos: pasta no Drive, se existir.
 - **Identidade visual**: **definida pelo site**, registrada em `remotion/src/marca.ts` (tokens convertidos de oklch) e no `FRAMEWORK.md`. Não herdar nada da Profissio.ai.
 
@@ -54,7 +53,7 @@ Hosts que o cinto exige na allowlist do environment (literal por subdomínio, `*
 
 ## IDs e contas
 
-- **Metricool**: marca do Profecia **PENDENTE conectar** (conta `suporte@profissio.ai`, a mesma da marca Profissio.ai/blog_id 6736175).
+- **Metricool**: marca **"Profec.ia", blog_id `7027080`** (conta `suporte@profissio.ai`, a mesma da marca Profissio.ai/blog_id 6736175; timezone `America/Sao_Paulo`). Conectada em 18/set/2026 e **verificada por dados** no mesmo dia: Instagram `@meuprofecia` (10,7 mil seguidores, ~2 Reels/dia), Facebook página `991021544103898` (306 seguidores, ~4 posts/dia), TikTok `@meuprofeciaoficial` (responde, mas zerado: 0 seguidores, 0 vídeos no dia da conexão; conferir se a conta tem conteúdo). Sem YouTube nesta marca. Nenhum post agendado em 18/set.
 - **ElevenLabs**: mesma chave do grupo (`ELEVENLABS_API_KEY` no environment). Escopos: TTS, STT, sound_generation, voices_read e **music** (Eleven Music, `POST /v1/music`, até 600s; usar para trilhas; sound-generation fica para SFX).
 - **Biblioteca de SFX**: copiar `assets/sfx/` do repo `profissioai-conteudo` (13+ sons de UI validados, custo zero). São brand-neutral; a trilha musical deve ser própria por peça.
 - **Kairogen**: conta `suporte@profissio.ai`, FREE, 0 créditos (B-roll por IA indisponível).
