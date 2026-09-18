@@ -25,7 +25,31 @@ Este repositório é o **Profecia Conteúdo Studio**: edição e agendamento de 
 ## Working dirs
 
 - Estúdio: este repo (symlink `~/profecia-conteudo`). Projetos em `projects/<nome>/`.
-- Ferramentas: `video-use` e `hyperframes` em `/workspace/...` (cloud). Ambiente novo: `bash scripts/setup.sh` e `bash scripts/validate.sh`.
+- Ferramentas: `video-use` e `hyperframes` em `/workspace/...` (cloud). Ambiente novo: `bash scripts/setup.sh` e `bash scripts/validate.sh`. **Em sessão nova, conferir `ls /workspace` antes de contar com video-use ou hyperframes**; se estiver vazio, rodar o `setup.sh` à mão.
+- **Campo de setup script do environment: usar caminho absoluto**, nunca `bash scripts/setup.sh`. O comando de boot roda com o diretório de trabalho no **pai** do repo, então o caminho relativo falha com `No such file or directory` (exit 127) e a sessão nasce sem `/workspace` e sem skills. Versão à prova de diretório, idêntica nos estúdios irmãos:
+  ```bash
+  for p in ./scripts/setup.sh ./*/scripts/setup.sh; do [ -f "$p" ] && exec bash "$p"; done; p=$(find /home /workspace /repo /app /src -maxdepth 4 -type f -path "*/scripts/setup.sh" 2>/dev/null | head -1); [ -n "$p" ] && exec bash "$p"; echo "setup.sh nao encontrado no repo"; exit 1
+  ```
+
+## Cinto de ferramentas (portado do `profissioai-conteudo` em 18/set/2026)
+
+Ferramenta é genérica, marca não é: os scripts abaixo vieram sem edição (zero referências de marca, conferido por varredura). Só `setup.sh`, `validate.sh`, `remotion/src/marca.ts`, `remotion/src/Root.tsx` e `remotion/package.json` carregam nome de estúdio.
+
+| Arquivo | O que faz |
+|---|---|
+| `scripts/decupar.py` | Decupa vídeo por **âncoras de texto** ("de tal frase até tal frase", `edl.json`) casadas contra transcrição com timestamp por palavra. Junta trechos, gira, aplica LUT, normaliza áudio |
+| `scripts/relatorio_decupagem.py` | Retranscreve as peças finais e monta o relatório do que ficou e do que caiu |
+| `scripts/gera_lut_slog2.py` | Gera LUT 3D de S-Log2/S-Gamut para Rec.709 com a `colour-science` |
+| `scripts/zip_index_remoto.py` | Lista e extrai arquivos de um ZIP gigante no Drive por *range request*, sem baixar o ZIP |
+| `scripts/gera_imagem.py` | Gera imagem pela OpenAI ou pelo Gemini, mesma interface; chaves **só** por variável de ambiente (recusa chave por argumento) |
+| `scripts/sobe_para_drive.py` | Sobe arquivos para uma pasta do Drive com token de acesso |
+| `remotion/` | Composições React (`CartaoTituloVertical`, `CartaoTituloQuadrado`). Paleta e fonte vivem **só** em `src/marca.ts`; rodapé em `src/Root.tsx`. Render usa o `headless_shell` do Playwright (fixado em `remotion.config.ts`) |
+
+`remotion/src/marca.ts` está com **placeholder neutro (grafite/branco)** até a identidade do Profecia ser definida; quando chegar, trocar só os hexes e a fonte ali.
+
+Chaves que os scripts esperam **nas variáveis de ambiente do environment** (nunca em arquivo do repo, nunca no chat): `ELEVENLABS_API_KEY` (presente), `OPENAI_API_KEY` e `GEMINI_API_KEY` (**PENDENTES** neste environment em 18/set/2026; `gera_imagem.py --listar` acusa). Variável cadastrada com sessão aberta só aparece em **sessão nova**; conferir com `printenv | grep -c API_KEY`. Chave válida não significa quota: no Gemini, `429` com `quotaId: ...-FreeTier` quer dizer que o projeto da chave não está no faturamento (ler o campo `details` do erro).
+
+Hosts que o cinto exige na allowlist do environment (literal por subdomínio, `*.dominio.com` para site inteiro): `api.elevenlabs.io`, `api.openai.com`, `generativelanguage.googleapis.com`, `www.googleapis.com`, `drive.google.com`, `drive.usercontent.google.com`, `pypi.org`, `files.pythonhosted.org`, `registry.npmjs.org`, `api.github.com` + GitHub Releases. `raw.githubusercontent.com` não precisa. Diagnóstico: `curl -sv https://host/ 2>&1 | grep CONNECT`; `403` no CONNECT é allowlist, qualquer outra resposta é chave, quota ou rota.
 
 ## IDs e contas
 
@@ -46,7 +70,16 @@ Ver o `CLAUDE.md` do `suportezv/profissioai-conteudo`, seções "Rede do environ
 - Render de composição do Claude Design: ver `projects/01-funil-automatico/POS.md` do repo irmão (Playwright + seek determinístico, vendorizar React/Babel do npm, fontes @fontsource, viewport 1080x1964, crop 1080:1920).
 - TTS: validar pronúncia por STT antes de mixar; frases curtas de fecho com `previous_text`; "com a Agente" soa como "com a gente", evitar a sequência.
 - Legendas SEMPRE por último no filter chain; proxy SDR para brutos HLG de iPhone; zoompan para zoom animado.
+- **Brutos de Sony em S-Log2 (A7 III): converter, não "filtrar".** O XML lateral do clipe (`C00xxM01.XML`) declara `CaptureGammaEquation`/`CaptureColorPrimaries`; quando diz `s-log2`/`s-gamut`, gerar a LUT com `scripts/gera_lut_slog2.py` (exposição −0,5 stop e joelho em 0,65, senão o branco estoura) e conferir que o ffmpeg aplica a `lut3d` em RGB, não em YUV (`-v verbose`). Saída com `out_range=tv` e `-color_range tv`.
+- **Câmera pode gravar na vertical sem gravar a flag de rotação.** O arquivo vem 3840x2160 deitado e o ffprobe não mostra rotação; só olhando um frame se descobre. Corrigir com `transpose=1` antes de escalar. Checar um frame de qualquer lote novo antes de planejar o corte.
+- **Decupagem por âncora de texto, não por timecode.** `scripts/decupar.py` recebe um `edl.json` onde cada trecho é "de tal frase até tal frase" e resolve os tempos contra a transcrição do Scribe. Revisar um corte vira editar uma frase; o campo `apos` empurra o cursor quando a mesma frase aparece antes.
+- **Remotion renderiza com o `headless_shell`, não com o Chromium do Playwright.** O `chromium-1194` removeu o headless antigo e o launch morre com "Old Headless mode has been removed". Binário certo: `/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell`, fixado em `remotion/remotion.config.ts`. Baixar o browser próprio do Remotion está fora da allowlist. Licença do Remotion não é MIT (grátis até 3 funcionários; acima, Company License): confirmar enquadramento antes de produção. Sem rede de fontes no render: fonte de marca vira asset local.
+- **Processo em background com `nohup`/`setsid` é recolhido quando a tool call retorna.** Usar `run_in_background: true` da ferramenta Bash, que o harness rastreia. Em lote longo, `flock` evita dois loops escrevendo o mesmo arquivo.
+- **Ler o índice de um ZIP gigante no Drive sem baixar o arquivo.** `drive.usercontent.google.com` aceita `Range`: pegar os últimos ~64 KB, achar o EOCD (e o ZIP64 em arquivo >4 GB), listar o central directory e extrair cada entrada `stored` por outro `Range`. Script: `scripts/zip_index_remoto.py`.
+- **Metricool, rascunho com data vencida não publica e não avisa.** Post `draft:true` com data passada continua no calendário e em `getScheduledPosts` como se agendado, mas nunca dispara. Quem agenda tira do rascunho na mesma sessão e confirma com `getScheduledPosts`; data no passado exige data nova.
+- **Patch `video-use-is-portrait-source` aposentado (18/set/2026).** O upstream do video-use passou a ler o `rotation` do side data. O `validate.sh` testa **comportamento** (retrato, paisagem e paisagem com matriz de rotação 90) em vez de procurar patch no código.
 
 ## Histórico de decisões
 
 - **18/ago/2026**: estúdio criado por réplica do `profissioai-conteudo` a pedido do usuário. Infra e gotchas herdados; marca 100% PENDENTE até a leitura de `profec.ia.br` e as definições da equipe.
+- **18/set/2026**: cinto de ferramentas portado do `profissioai-conteudo` seguindo o `PORTAR.md` de lá (6 scripts genéricos, `setup.sh`/`validate.sh` com 5 linhas de marca trocadas, `remotion/` com paleta placeholder neutra, `patches/` aposentado). Marca continua PENDENTE: `marca.ts` e o copy de exemplo do `Root.tsx` são placeholders declarados, não identidade.

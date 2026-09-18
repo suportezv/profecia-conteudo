@@ -31,6 +31,23 @@ PENDENTE: derivar das fontes primárias quando lidas. Método validado no estúd
 - **Fundo e paleta: PENDENTES** (identidade do Profecia; não usar a aurora da Profissio.ai sem confirmação).
 - Área segura 9:16: 220px topo, 420px base. Duração alvo 20 a 60s.
 
+## Escolha do framework de motion: HyperFrames ou Remotion
+
+O estúdio mantém os dois, e a escolha **não é preferência do momento**: cada peça declara o seu no `BRIEFING.md`, na primeira linha. Sem isso, quem pegar o projeto depois não sabe onde mexer.
+
+**O que decide**: a ponte entre os dois só existe num sentido. Há a skill `remotion-to-hyperframes`; **não existe o inverso**. Então peça feita em HyperFrames é definitiva, e peça feita em Remotion ainda pode migrar. Na dúvida, Remotion é a aposta reversível.
+
+| Use **HyperFrames** quando | Use **Remotion** quando |
+|---|---|
+| É peça da série recorrente, na gramática já documentada | A peça é exceção, fora do padrão da série |
+| Você quer o fluxo pronto: brief, storyboard, registry de ~400 blocos, legendas, áudio, render em nuvem | A composição precisa de lógica de programação, dados ou parametrização |
+| O visual pedido já existe no registry (scanlines, glitch, gráfico, janela de terminal) | Você vai gerar **N variações** da mesma peça mudando nome, cupom, idioma ou número |
+| Ninguém vai reprocessar a peça em outro framework | Há chance real de a peça mudar de destino depois |
+
+**Padrão declarado: HyperFrames**, herdado do grupo enquanto o Profecia não tem série própria; é o que está integrado ao fluxo e tem as 20 skills. O Remotion entra por decisão consciente. Revisar o padrão quando a primeira série do Profecia existir.
+
+**Custo de manter os dois, para vigiar**: dois `node_modules`, dois caminhos de render e dois lugares onde a paleta pode divergir. Os tokens do Remotion vivem em `remotion/src/marca.ts` (hoje placeholder neutro): quando a paleta do Profecia for definida, atualizar os dois lados.
+
 ## Fórmula da caption
 
 Estrutura validada no grupo (adaptar quando a persona existir): abertura de anúncio de feature ("Apresentando..." confirmar se o padrão vale para o Profecia), 1 a 2 parágrafos de valor concreto, CTA oficial, sem travessão.
