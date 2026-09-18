@@ -12,8 +12,8 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1920}
       defaultProps={{
-        titulo: "Cartão de exemplo, marca pendente",
-        destaque: "pendente",
+        titulo: "Sua fé, todo dia, que te ouve e responde.",
+        destaque: "responde",
         rodape: "profec.ia.br",
       }}
     />
@@ -25,8 +25,8 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1080}
       defaultProps={{
-        titulo: "Cartão de exemplo, marca pendente",
-        destaque: "pendente",
+        titulo: "Sua fé, todo dia, que te ouve e responde.",
+        destaque: "responde",
         rodape: "profec.ia.br",
       }}
     />

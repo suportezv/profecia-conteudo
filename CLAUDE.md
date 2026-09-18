@@ -4,17 +4,16 @@ Este repositório é o **Profecia Conteúdo Studio**: edição e agendamento de 
 
 **Antes de editar qualquer vídeo ou escrever qualquer caption, leia `FRAMEWORK.md`.**
 
-> **O que se sabe do Profecia até aqui** (18/ago/2026, fontes internas da Profissio): é um produto/agente do ecossistema Profissio, listado na Documentação de CS como cliente, segmento **"Agente IA"**, ao lado de CarBro, Spotter e Viva+. A pauta "Video Hero Profecia" existe na pasta de Pautas da agência (editoria Agentes), sem desenvolvimento. **O site `profec.ia.br` ainda não foi lido** (domínio fora da allowlist do environment). Tudo que não está confirmado abaixo é **PENDENTE**: perguntar ou ler na fonte, nunca inventar, e nunca herdar posicionamento da Profissio.ai ou dos outros estúdios sem confirmação.
+> **O que é o Profecia** (lido do site `profec.ia.br` em 18/set/2026, fonte primária): um **companheiro de fé cristã por WhatsApp**, produto B2C, "Powered by Profissio.ai". Título do site: *"Profecia: Sua fé, todo dia, que te ouve e responde"*. A pessoa manda texto, áudio ou foto e a Profecia (feminino, "ela") responde com orações, reflexões, versículos, explicação da Bíblia e **músicas personalizadas**, 24h, "fundamentada na Palavra de Deus", "sem julgamento, sem pressão". Não substitui igreja nem pastor (FAQ literal). Planos oficiais (jul/2026): **Anual 12x R$ 9,90** (R$ 118,80), Trimestral 3x R$ 19,90, Mensal R$ 29,90; checkout em `checkout.profec.ia.br`; WhatsApp de entrada `+55 11 5192-1507`. A leitura anterior (ago/2026, "segmento Agente IA" na Documentação de CS da Profissio) descrevia só a tecnologia; o posicionamento público é o acima. Detalhes de persona, pilares e paleta estão no `FRAMEWORK.md`.
 
-## PENDENTES de marca (bloqueiam produção de texto público)
+## PENDENTES de marca (o que ainda bloqueia texto público)
 
-- **O que é o Profecia**: proposta, público, produto. Ler `profec.ia.br` (liberar domínio) e perguntar à equipe.
-- **Identidade visual**: paleta, fontes, fundos. NÃO herdar a aurora rosa da Profissio.ai sem confirmação; o Profecia pode ter identidade própria.
-- **Persona e voz do perfil**: quem fala, tom, CTAs oficiais.
-- **Pronúncia da marca em TTS**: hipótese "profecia" como a palavra em português; confirmar com o usuário antes da primeira locução (regra aprendida: a Profissio.ai se fala "profício ei ái").
-- **Voz ElevenLabs**: voice_id próprio ou o mesmo `LetL52AJ3xLLkD3x88iE` da Profissio.ai? Confirmar.
+- **Confirmação da equipe**: o `FRAMEWORK.md` foi preenchido só com o que o site diz. Persona do perfil (quem fala nas redes: a própria Profecia em primeira pessoa ou a marca em terceira?), CTA oficial das redes (link do site, do checkout ou o WhatsApp?) e handle do Instagram (o site linka `instagram.com/` sem handle) precisam de confirmação.
+- **Pronúncia da marca em TTS**: hipótese "profecia" como a palavra em português; confirmar antes da primeira locução (regra aprendida: a Profissio.ai se fala "profício ei ái").
+- **Voz ElevenLabs**: o produto é feminino e acolhedor; voice_id próprio ou o `LetL52AJ3xLLkD3x88iE` da Profissio.ai? Confirmar.
 - **Redes e Metricool**: conectar a marca do Profecia no painel (conta `suporte@profissio.ai`) e registrar aqui o blog_id.
-- **Ativos de marca**: pasta no Drive com logo/fontes/fundos do Profecia, se existir.
+- **Ativos de marca**: o logo (pomba dourada sobre cruz, círculo) está em `assets/marca/logo-profecia.png`, baixado do site. Arquivos das fontes Fraunces e Manrope e outros ativos: pasta no Drive, se existir.
+- **Identidade visual**: **definida pelo site**, registrada em `remotion/src/marca.ts` (tokens convertidos de oklch) e no `FRAMEWORK.md`. Não herdar nada da Profissio.ai.
 
 ## Regras que valem em qualquer resposta pública (herdadas do grupo, confirmadas pelo usuário)
 
@@ -45,9 +44,11 @@ Ferramenta é genérica, marca não é: os scripts abaixo vieram sem edição (z
 | `scripts/sobe_para_drive.py` | Sobe arquivos para uma pasta do Drive com token de acesso |
 | `remotion/` | Composições React (`CartaoTituloVertical`, `CartaoTituloQuadrado`). Paleta e fonte vivem **só** em `src/marca.ts`; rodapé em `src/Root.tsx`. Render usa o `headless_shell` do Playwright (fixado em `remotion.config.ts`) |
 
-`remotion/src/marca.ts` está com **placeholder neutro (grafite/branco)** até a identidade do Profecia ser definida; quando chegar, trocar só os hexes e a fonte ali.
+`remotion/src/marca.ts` carrega a paleta e as fontes **do site** (oklch convertido para hex); se a marca mudar, trocar só os hexes e a fonte ali.
 
-Chaves que os scripts esperam **nas variáveis de ambiente do environment** (nunca em arquivo do repo, nunca no chat): `ELEVENLABS_API_KEY` (presente), `OPENAI_API_KEY` e `GEMINI_API_KEY` (**PENDENTES** neste environment em 18/set/2026; `gera_imagem.py --listar` acusa). Variável cadastrada com sessão aberta só aparece em **sessão nova**; conferir com `printenv | grep -c API_KEY`. Chave válida não significa quota: no Gemini, `429` com `quotaId: ...-FreeTier` quer dizer que o projeto da chave não está no faturamento (ler o campo `details` do erro).
+Chaves que os scripts esperam **nas variáveis de ambiente do environment** (nunca em arquivo do repo, nunca no chat): `ELEVENLABS_API_KEY`, `OPENAI_API_KEY` e `GEMINI_API_KEY`. As três foram cadastradas pelo usuário em 18/set/2026; as duas novas só aparecem em **sessão nova** (conferir com `printenv | grep -c API_KEY`, esperado 3, e com `gera_imagem.py --listar`). Variável cadastrada com sessão aberta só aparece em **sessão nova**; conferir com `printenv | grep -c API_KEY`. Chave válida não significa quota: no Gemini, `429` com `quotaId: ...-FreeTier` quer dizer que o projeto da chave não está no faturamento (ler o campo `details` do erro).
+
+Allowlist conferida em 18/set/2026 (CONNECT pelo proxy): `api.openai.com`, `generativelanguage.googleapis.com`, `api.elevenlabs.io`, `drive.google.com`, `drive.usercontent.google.com` e **`profec.ia.br`** respondem; **`www.googleapis.com` continua 403** (`scripts/sobe_para_drive.py` indisponível até liberar); `www.profec.ia.br` não resolve em DNS, o site vive só no apex.
 
 Hosts que o cinto exige na allowlist do environment (literal por subdomínio, `*.dominio.com` para site inteiro): `api.elevenlabs.io`, `api.openai.com`, `generativelanguage.googleapis.com`, `www.googleapis.com`, `drive.google.com`, `drive.usercontent.google.com`, `pypi.org`, `files.pythonhosted.org`, `registry.npmjs.org`, `api.github.com` + GitHub Releases. `raw.githubusercontent.com` não precisa. Diagnóstico: `curl -sv https://host/ 2>&1 | grep CONNECT`; `403` no CONNECT é allowlist, qualquer outra resposta é chave, quota ou rota.
 
@@ -82,4 +83,5 @@ Ver o `CLAUDE.md` do `suportezv/profissioai-conteudo`, seções "Rede do environ
 ## Histórico de decisões
 
 - **18/ago/2026**: estúdio criado por réplica do `profissioai-conteudo` a pedido do usuário. Infra e gotchas herdados; marca 100% PENDENTE até a leitura de `profec.ia.br` e as definições da equipe.
-- **18/set/2026**: cinto de ferramentas portado do `profissioai-conteudo` seguindo o `PORTAR.md` de lá (6 scripts genéricos, `setup.sh`/`validate.sh` com 5 linhas de marca trocadas, `remotion/` com paleta placeholder neutra, `patches/` aposentado). Marca continua PENDENTE: `marca.ts` e o copy de exemplo do `Root.tsx` são placeholders declarados, não identidade.
+- **18/set/2026**: site `profec.ia.br` lido pela primeira vez (usuário liberou o domínio). O Profecia é um companheiro de fé cristã por WhatsApp, B2C, e não um "agente de IA" no sentido B2B dos outros clientes: `CLAUDE.md`, `FRAMEWORK.md` e `remotion/src/marca.ts` reescritos com o que o site diz, sem inferência. Chaves OpenAI/Gemini cadastradas pelo usuário; visíveis só em sessão nova.
+- **18/set/2026**: cinto de ferramentas portado do `profissioai-conteudo` seguindo o `PORTAR.md` de lá (6 scripts genéricos, `setup.sh`/`validate.sh` com 5 linhas de marca trocadas, `remotion/` com paleta placeholder neutra, `patches/` aposentado). No mesmo dia o site foi lido e a paleta real substituiu o placeholder (item acima).
